@@ -1,0 +1,18 @@
+//- featurePost = 5
+.container 
+ h3.text-center.mt-5.text-signature Mới nhất
+ hr
+ .mt-3.row.row-cols-1.row-cols-md-2.row-cols-lg-3.g-4
+  each post, index in posts ? posts : ["Empty"] 
+        .col
+          .card.h-100
+            img.card-img-top(src=`${post.photo||'/assets/img/gallery/gallery-5.jpg'}` alt= index)
+            .card-body
+              h5.card-title
+                a.text-signature(href=`/posts/${post.slug||'#'}`)= post.title
+              p.card-text.text-truncate-2= post.summary
+            .card-footer
+              ul.list-group.list-group-flush.text-center.mb-2
+                li.list-group-item.small= `Author: ${post.author?post.author.name:'Admin'}`
+                li.list-group-item.small= `${post.minuteRead} read.`
+              small.text-body-secondary Updated at: #{post.updatedAt.toLocaleString()}

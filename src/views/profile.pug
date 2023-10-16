@@ -1,0 +1,55 @@
+extends base
+
+block content
+  .h-60p
+  .container
+    .row.mt-5
+      .col-xl-4
+        .card.mb-4.mb-xl-0
+          .card-header.text-center Ảnh đại diện
+          .card-body.text-center
+            .ratio.ratio-1x1
+              img.img-fluid.rounded-circle.mb-2.object-fit-cover#userPhoto(src= `${user.photo||'/assets/img/astronaut.png'}` alt=`${user.name}`)
+            .small.fst-italic.text-muted.mb-4 Ảnh jpg/jpeg/png không vượt quá 5MB
+            form#form-avatar
+              input#inp-photo(type="file")
+              button.mt-3.btn.btn-signature#btnUserPhoto(type='submit') Cập nhật ảnh đại diện
+      .col-xl-8
+        .card.mb-4
+          .card-header.text-center Thông tin người dùng
+          .card-body
+            form#user-info
+              .mb-3
+                label.small.mb-1(for='inputName') Tên hiển thị
+                input.form-control#inputName(type='text' placeholder='Enter your name' value=`${user.name}`)
+              .mb-3
+                label.small.mb-1(for='inputEmail') Email
+                input.form-control#inputEmail(type='email' placeholder='Enter your email address' value=`${user.email}`)
+              .mb-3.text-end
+                button.btn.btn-signature(type='submit') Cập nhật
+        .card.mb-4
+          .card-header.text-center Thay đổi mật khẩu
+          .card-body
+            form#password-info
+              .mb-3
+                label.small.mb-1(for='inputName') Mật khẩu hiện tại:
+                input.form-control#inputPasswordCurrent(type='password' placeholder='Enter your current password')
+              .mb-3
+                label.small.mb-1(for='inputPassword') Mật khẩu mới:
+                input.form-control#inputPassword(type='password' placeholder='Enter your new password')
+              .mb-3
+                label.small.mb-1(for='inputPasswordConfirm') Xác nhận mật khẩu mới:
+                input.form-control#inputPasswordConfirm(type='password' placeholder='Confirm new password')
+              .mb-3.text-end
+                button.btn.btn-signature(type='submit') Xác nhận
+
+  //- Toast
+  .toast-container.position-fixed.bottom-0.end-0.p-3
+    .toast.bg-signature(role='alert' aria-live='assertive' aria-atomic='true')
+      .toast-header 
+        strong.me-auto Message
+        button.btn-close(type='button' data-bs-dismiss='toast' aria-label='Close')
+      .toast-body
+        p#toast-message Hello, world! This is a toast message.
+block append script
+  script(src="/assets/js/profile.js") 

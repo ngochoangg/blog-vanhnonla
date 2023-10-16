@@ -1,0 +1,22 @@
+//- Get 'posts' as an Array
+#carouselSlider.carousel.slide.carousel-fade(data-bs-ride="carousel")
+  .carousel-inner.ratio.ratio-16x9
+    each post, index in posts ? posts : ['No values']
+      if(index === 0)
+        .carousel-item.active
+          img.d-block.w-100.img-fluid(src=`${post.photo||'/assets/img/gallery/gallery-5.jpg'}` alt=`${post.slug||'...'}`)
+          .carousel-caption.d-none.d-sm-block.bg-signature.rounded
+            a.h5(href=`/posts/${post.slug|| '#'}`)= post.title
+            p= post.summary
+      else 
+        .carousel-item
+          img.d-block.w-100.img-fluid(src=`${post.photo||'/assets/img/gallery/gallery-5.jpg'}` alt=`${post.slug||'...'}`)
+          .carousel-caption.d-none.d-sm-block.bg-signature.rounded
+            a.h5(href=`/posts/${post.slug|| '#'}`)= post.title
+            p= post.summary
+  button.carousel-control-prev(type='button' data-bs-target='#carouselSlider' data-bs-slide='prev')
+    span.carousel-control-prev-icon(aria-hidden='true')
+    span.visually-hidden Previous
+  button.carousel-control-next(type='button' data-bs-target='#carouselSlider' data-bs-slide='next')
+    span.carousel-control-next-icon(aria-hidden='true')
+    span.visually-hidden Next

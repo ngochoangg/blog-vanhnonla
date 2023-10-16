@@ -1,0 +1,14 @@
+//- Similar post at same category `similarPosts`
+.container.mt-5 
+ h3.text-center.text-signature Similar post
+ hr
+ .row.row-cols-1.row-cols-md-2.row-cols-xl-4.g-4
+  each post in similarPosts
+   .col
+    .card.text-bg-dark.h-100
+      img.card-img(src=`${post.photo||'/assets/img/gallery/gallery-9.jpg'}` alt='...')
+      .card-img-overlay
+       a.card-title(href=`${'/posts/'+ post.slug || '#'}`)
+        h5.card-title.bg-signature-light.p-3.rounded.text-center= post.title
+      .card-footer
+       small #{post.updatedAt.toLocaleString()}

@@ -1,0 +1,31 @@
+nav.navbar.navbar-expand-md.border-bottom.border-danger.border-3.rounded-bottom.fixed-top.bg-signature
+  .container
+    a.navbar-brand.abs.py-3.font-tilt(href='/') VanhNonLa
+    button.navbar-toggler.ms-auto(type='button' title='menu' data-bs-toggle='collapse' data-bs-target='#collapseNavbar')
+      span.navbar-toggler-icon
+    .navbar-collapse.collapse.justify-around#collapseNavbar
+      ul.navbar-nav.w-100.justify-content-center.mx-auto.h5.font-tilt
+        li.nav-item.mx-auto.text-center.active
+          a.nav-link(href='/posts')
+            strong Toàn Bộ Bài Viết
+        if user && (user.role=='admin')
+          li.nav-item.mx-auto.text-center
+              a.nav-link(href='/write')
+                strong Viết Bài 
+        li.nav-item.mx-auto.text-center
+          a.nav-link(href='/faq')
+            strong FAQs
+      ul.navbar-nav.ms-auto
+        if user
+          li.nav-item.dropdown.mx-auto
+            a.nav-link.dropdown-toggle.text-center(href='#' role="button" data-bs-toggle="dropdown" id='menuUser' aria-expanded="false")
+              img.img-fluid.circle-image(src=`${user.photo || '/assets/img/astronaut.png'}` style='max-height:38px;max-width:38px', alt=`avt_${user.name}`)
+            ul.dropdown-menu.dropdown-menu-end(aria-labelledby='#menuUser')
+              li
+                a.dropdown-item(href='/profile') Profile
+              li
+                button.btn.btn-link(type="button" id='btnLogout') Logout
+                //- a.dropdown-item(href='#') Logout
+        else
+          li.nav-item.dropdown.my-2
+            a.nav-link.border.border-2.rounded-pill.px-4.text-center(href='/login') Login

@@ -1,0 +1,33 @@
+extends base
+
+block append head 
+  link(href='https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap' rel='stylesheet')
+  link(rel="stylesheet" href="/assets/css/style.css")
+
+block content
+  div(style="height:60px;")
+  .d-md-flex.vh-100.bg-transparent.pt-5(style='background-image: url(\'/assets/img/bg_1.jpg\');')
+    .container
+      .row.align-items-center.justify-content-center.mx-auto
+        .col-sm-4.mx-auto.bg-signature.rounded.rounded-5.py-5
+          .form-group
+            .text-center.mb-5
+              h3 Login to <br/>
+                strong VanhNonLa
+            form(action='/api/v1/login' method='post')
+              .input-group.mb-3
+                span.input-group-text Email: 
+                input.form-control#email(type='email' placeholder='your-email@gmail.com')
+              .input-group.mb-3
+                span.input-group-text Password:
+                input.form-control#password(type='password' placeholder='Your Password')
+              .mb-5.text-end
+                strong.p-3
+                  a.text-light(href='/reset-password') Forgot Password?
+              input.btn.w-100.btn-warning(type='submit' value='Log In')
+  script(src="/assets/js/login.js")
+  .modal#modalLoginStatus.fade(tabindex='-1' role='dialog' aria-hidden='true')
+    .modal-dialog.modal-dialog-centered(role='document')
+      .modal-content
+        .modal-body
+          p#textModal.text-center.text-dark

@@ -1,0 +1,22 @@
+extends base
+
+//- This one has `post` as data
+block content
+  .container 
+    .row.no-gutter.align-items-center.justify-content-center 
+      .col-md-9.pt-5.mt-5.text-center 
+        h1.mb-0.text-signature= post.title
+    .row.justify-content-center.mt-5.mb-5 
+      .col-lg-8
+        img.img-fluid(src=`${post.photo?post.photo:"/assets/img/gallery/gallery-5.jpg"}`, alt= post.slug)
+        .mt-5
+          - var content = post.content.replace(/&lt;/g, '<').replace(/&gt;/g, '>')
+          p !{content}
+    .col
+      p.text-center.text-signature 
+        if post.author
+          strong Author: #{post.author.name}
+        else
+          strong Author: Admin
+  
+  include components/_similar

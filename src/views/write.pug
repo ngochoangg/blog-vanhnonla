@@ -1,0 +1,98 @@
+extends base
+
+block content
+   div(style="height:60px;")
+   .container.mb-5
+      .row.mt-5.col-12.mx-auto
+         label.form-label
+            h2 Tiêu đề
+               span.small.text-danger (*):
+      input#inp-title.form-control.form-control-lg(type='text' placeholder='Input title here...' autofocus='true')
+
+      .row.mt-3.justify-content-center
+         label.form-label 
+            strong Thông tin bổ sung:
+         .input-group
+            select.form-select#select-category
+               option(value="general" selected) Chọn danh mục
+               option(value="checkin") Check-In
+               option(value="discover") Khám Phá
+               option(value="tips") Mẹo Hay
+               option(value="food") Ẩm Thực
+            span.input-group-text Vị trí 
+            input.form-control#inp-location(type="text" placeholder="Location...")
+
+      .row.mt-3 
+         .input-group 
+            span.input-group-text
+               strong Tóm tắt
+                  span.small.text-danger (*)
+            input.form-control#inp-summary(type="text" placeholder="Summary...")
+            button.btn.btn-signature#btn-summary Tóm tắt tự động
+
+      .row.justify-content-center.mt-5
+         label.form-label 
+            strong Nội dung 
+               span.small.text-danger (*):
+         .col-12
+            textarea#content-editor
+      //- .row.justify-content-center.mt-2
+      //-    .col-6.mx-auto.mt-5 
+      //-       button.btn.btn-success#btn-getvalue Get Value 
+
+      label.form-label.mt-5
+         h3 Chọn ảnh cho bài viết
+            span.small.text-danger (*):
+
+      form#formUpload(enctype='multipart/form-data')
+         .input-group.mb-3
+            input.form-control#formFile(type='file' name='image')
+            button.btn.btn-signature#btn-submit.disabled(type='submit') Tải ảnh lên
+
+      .progress.mt-1.d-none(role='progressbar' aria-label="Uploading image")
+         .progress-bar.progress-bar-striped.progress-bar-animated.w-100
+
+      .row.justify-content-center.mt-3.d-none#div-image-upload
+         .col-6
+            img.img-fluid#img-upload
+
+
+      .row.justify-content-center.mt-3
+         .col
+            p.text-start.text-signature
+               strong Tác giả:&nbsp;
+               |#{user.name}
+
+            p#userID.d-none= user._id
+
+         button.btn.btn-warning.btn-signature.col#btn-preview Xem trước
+
+   //- Modal
+   .modal.fade#modalPreview(tabindex='-1' aria-labelledby="modalPreviewPost" aria-hidden="true")
+      .modal-dialog.modal-dialog-scrollable
+         .modal-content
+            .modal-header
+               .modal-title.text-signature.h3 Xem trước bài viết
+               button.btn-close(type='button' data-bs-dismiss='modal' aria-label='Close')
+            .modal-body
+               h3.text-center#modal-preview-title This Is Title
+               .w-100.mt-1
+                  img.img-fluid(src='/assets/img/gallery/gallery-4.jpg')#modal-preview-photo
+               .mt-1#modal-preview-content
+            .modal-footer
+               button.btn.btn-secondary(type='button' data-bs-dismiss='modal') Hủy
+               button.btn.btn-success#modal-btn-submit(type='button') Đăng bài
+
+
+   //- Toast
+   .toast-container.position-fixed.top-0.end-0.p-3
+      .toast.bg-signature(role='alert' aria-live='assertive' aria-atomic='true')
+         .toast-header 
+            strong.me-auto Message
+            button.btn-close(type='button' data-bs-dismiss='toast' aria-label='Close')
+         .toast-body
+            p#toast-message Hello, world! This is a toast message.
+
+block append script 
+   script(src='/tinymce/tinymce.min.js' type='application/javascript')
+   script(src='/assets/js/write.js' type='application/javascript')

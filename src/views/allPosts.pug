@@ -1,0 +1,40 @@
+extends base
+
+block content
+  div(style="height:60px;")
+  include components/_categories-select
+  .container
+    h2.text-center.text-signature.mt-3
+      strong Toàn Bộ Bài Viết
+    hr
+    .row.row-cols-1.row-cols-md-2.row-cols-lg-3.g-4
+      each post, index in posts ? posts : ["Empty"] 
+        .col
+          .card.h-100
+            img.card-img-top(src=`${post.photo||'/assets/img/gallery/gallery-5.jpg'}` alt= index)
+            .card-body
+              h5.card-title
+                a.text-signature(href=`/posts/${post.slug||'#'}`)= post.title
+              p.card-text.text-truncate-2= post.summary
+            .card-footer
+              ul.list-group.list-group-flush.text-center.mb-2
+                li.list-group-item.small= `Author: ${post.author?post.author.name:'Admin'}`
+                li.list-group-item.small= `${post.minuteRead} read.`
+              small.text-body-secondary Updated at: #{post.updatedAt.toLocaleString()}
+
+    nav.mt-5(aria-label="Page navigation")
+      ul.pagination.justify-content-center
+        - if (currentPage <= 1)
+          li.page-item.disabled
+            a.page-link Previous
+        - else 
+          li.page-item
+            a.page-link(href='?page=' + (currentPage - 1)) Previous
+        li.page-item.disabled
+          p.page-link #{currentPage}/#{total}
+        - if (currentPage >= total)
+          li.page-item.disabled
+            a.page-link Next
+        - else 
+          li.page-item
+            a.page-link(href='?page=' + (currentPage + 1)) Next
